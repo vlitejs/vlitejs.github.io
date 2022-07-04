@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches:
+    pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Read .nvmrc
+        run: echo NVMRC=`cat .nvmrc` >> $GITHUB_ENV
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NVMRC }}
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test ESLint
+        run: npm run test:eslint
+
+      - name: Test Stylelint
+        run: npm run test:stylelint
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload GitHub Pages artifacts
+        uses: actions/upload-artifact@v1
+        if: github.ref == 'refs/heads/main' &&
+            github.repository == 'vlitejs/vlitejs.github.io' &&
+            github.event_name != 'pull_request'
+        with:
+          name: demo
+          path: dist
+
+  deploy-demo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: build
+    if: success() &&
+        github.ref == 'refs/heads/main' &&
+        github.repository == 'vlitejs/vlitejs.github.io' &&
+        github.event_name != 'pull_request'
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download GitHub Pages artifacts
+        uses: actions/download-artifact@v1
+        with:
+          name: demo
+          # The path is mandatory with actions/download-artifact@v2
+          # https://github.com/actions/download-artifact#compatibility-between-v1-and-v2
+          path: dist
+
+      - name: Deploy to Github Pages
+        uses: crazy-max/ghaction-github-pages@v1
+        with:
+          target_branch: demo
+          build_dir: dist
+          keep_history: false
+          commit_message: "Deploy to GitHub pages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
