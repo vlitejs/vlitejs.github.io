@@ -43,7 +43,7 @@ jobs:
       - name: Upload GitHub Pages artifacts
         uses: actions/upload-artifact@v1
         if: github.ref == 'refs/heads/dev-gh-pages' &&
-            github.repository == 'yoriiis/vlitejs' &&
+            github.repository == 'vlitejs/vlite' &&
             github.event_name != 'pull_request'
         with:
           name: gh-pages
@@ -55,7 +55,7 @@ jobs:
     needs: build
     if: success() &&
         github.ref == 'refs/heads/dev-gh-pages' &&
-        github.repository == 'yoriiis/vlitejs' &&
+        github.repository == 'vlitejs/vlite' &&
         github.event_name != 'pull_request'
     steps:
       - uses: actions/checkout@v2
