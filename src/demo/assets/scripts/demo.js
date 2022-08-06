@@ -3,6 +3,7 @@ import html5VideoTemplate from './templates/html5-video'
 import html5AudioTemplate from './templates/html5-audio'
 import youtubeTemplate from './templates/youtube-video'
 import vimeoTemplate from './templates/vimeo-video'
+import dailymotionTemplate from './templates/dailymotion-video'
 
 export default class Demo {
 	constructor() {
@@ -38,7 +39,8 @@ export default class Demo {
 			'html5-video': html5VideoTemplate(),
 			'html5-audio': html5AudioTemplate(),
 			'youtube-video': youtubeTemplate(),
-			'vimeo-video': vimeoTemplate()
+			'vimeo-video': vimeoTemplate(),
+			'dailymotion-video': dailymotionTemplate()
 		}
 
 		this.onClickOnNav = this.onClickOnNav.bind(this)
@@ -49,6 +51,9 @@ export default class Demo {
 		window.Vlitejs.registerPlugin('pip', window.VlitejsPip)
 		window.Vlitejs.registerProvider('youtube', window.VlitejsYoutube)
 		window.Vlitejs.registerProvider('vimeo', window.VlitejsVimeo)
+		window.Vlitejs.registerProvider('dailymotion', window.VlitejsDailymotion, {
+			playerId: 'x9scg'
+		})
 
 		this.addEvents()
 		this.initMedia({ provider: 'html5', type: 'video' })
