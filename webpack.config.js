@@ -66,7 +66,9 @@ module.exports = (env, argv) => {
 			historyApiFallback: true,
 			port: 3000,
 			compress: true,
-			hot: true
+			hot: true,
+			open: true,
+			https: true
 		},
 		plugins: [
 			new webpack.ProgressPlugin(),

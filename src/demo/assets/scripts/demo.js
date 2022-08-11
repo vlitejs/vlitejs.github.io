@@ -49,7 +49,15 @@ export default class Demo {
 	init() {
 		window.Vlitejs.registerPlugin('subtitle', window.VlitejsSubtitle)
 		window.Vlitejs.registerPlugin('pip', window.VlitejsPip)
-		window.Vlitejs.registerPlugin('cast', window.VlitejsCast)
+		window.Vlitejs.registerPlugin('cast', window.VlitejsCast, {
+			textTrackStyle: {
+				backgroundColor: '#21212190'
+			},
+			metadata: {
+				title: 'The Jungle Book',
+				subtitle: 'Walt Disney Animation Studios'
+			}
+		})
 		window.Vlitejs.registerProvider('youtube', window.VlitejsYoutube)
 		window.Vlitejs.registerProvider('vimeo', window.VlitejsVimeo)
 		window.Vlitejs.registerProvider('dailymotion', window.VlitejsDailymotion, {
