@@ -3,7 +3,6 @@ import html5VideoTemplate from './templates/html5-video'
 import html5AudioTemplate from './templates/html5-audio'
 import youtubeTemplate from './templates/youtube-video'
 import vimeoTemplate from './templates/vimeo-video'
-import dailymotionTemplate from './templates/dailymotion-video'
 
 export default class Demo {
 	constructor() {
@@ -39,8 +38,7 @@ export default class Demo {
 			'html5-video': html5VideoTemplate(),
 			'html5-audio': html5AudioTemplate(),
 			'youtube-video': youtubeTemplate(),
-			'vimeo-video': vimeoTemplate(),
-			'dailymotion-video': dailymotionTemplate()
+			'vimeo-video': vimeoTemplate()
 		}
 
 		this.onClickOnNav = this.onClickOnNav.bind(this)
@@ -49,20 +47,8 @@ export default class Demo {
 	init() {
 		window.Vlitejs.registerPlugin('subtitle', window.VlitejsSubtitle)
 		window.Vlitejs.registerPlugin('pip', window.VlitejsPip)
-		window.Vlitejs.registerPlugin('cast', window.VlitejsCast, {
-			textTrackStyle: {
-				backgroundColor: '#21212190'
-			},
-			metadata: {
-				title: 'The Jungle Book',
-				subtitle: 'Walt Disney Animation Studios'
-			}
-		})
 		window.Vlitejs.registerProvider('youtube', window.VlitejsYoutube)
 		window.Vlitejs.registerProvider('vimeo', window.VlitejsVimeo)
-		window.Vlitejs.registerProvider('dailymotion', window.VlitejsDailymotion, {
-			playerId: 'x9scg'
-		})
 
 		this.addEvents()
 		this.initMedia({ provider: 'html5', type: 'video' })
@@ -111,7 +97,7 @@ export default class Demo {
 	}
 
 	initMedia({ provider, type }) {
-		const plugins = provider === 'html5' && type === 'video' ? ['subtitle', 'pip', 'cast'] : []
+		const plugins = provider === 'html5' && type === 'video' ? ['subtitle', 'pip'] : []
 		this.content.innerHTML = this.templates[`${provider}-${type}`]
 		this.instance = new window.Vlitejs('#player', {
 			options: this.options[type],
