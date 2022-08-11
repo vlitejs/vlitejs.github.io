@@ -49,6 +49,7 @@ export default class Demo {
 	init() {
 		window.Vlitejs.registerPlugin('subtitle', window.VlitejsSubtitle)
 		window.Vlitejs.registerPlugin('pip', window.VlitejsPip)
+		window.Vlitejs.registerPlugin('cast', window.VlitejsCast)
 		window.Vlitejs.registerProvider('youtube', window.VlitejsYoutube)
 		window.Vlitejs.registerProvider('vimeo', window.VlitejsVimeo)
 		window.Vlitejs.registerProvider('dailymotion', window.VlitejsDailymotion, {
@@ -102,7 +103,7 @@ export default class Demo {
 	}
 
 	initMedia({ provider, type }) {
-		const plugins = provider === 'html5' && type === 'video' ? ['subtitle', 'pip'] : []
+		const plugins = provider === 'html5' && type === 'video' ? ['subtitle', 'pip', 'cast'] : []
 		this.content.innerHTML = this.templates[`${provider}-${type}`]
 		this.instance = new window.Vlitejs('#player', {
 			options: this.options[type],
