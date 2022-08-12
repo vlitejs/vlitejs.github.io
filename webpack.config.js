@@ -26,7 +26,7 @@ module.exports = (env, argv) => {
 			rules: [
 				{
 					test: /\.js$/,
-					include: [path.resolve(__dirname, './src')],
+					include: [path.resolve(__dirname, './src'), path.resolve(__dirname, '../vlite')],
 					use: [
 						{
 							loader: 'babel-loader'
@@ -35,7 +35,7 @@ module.exports = (env, argv) => {
 				},
 				{
 					test: /\.css$/,
-					include: [path.resolve(__dirname, './src')],
+					include: [path.resolve(__dirname, './src'), path.resolve(__dirname, '../vlite')],
 					use: [
 						MiniCssExtractPlugin.loader,
 						{
