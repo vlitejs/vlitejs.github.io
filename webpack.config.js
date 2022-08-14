@@ -1,3 +1,4 @@
+const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -6,19 +7,22 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
+const appDirectory = fs.realpathSync(process.cwd())
+const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
+
 module.exports = (env, argv) => {
 	const isProduction = argv.mode === 'production'
 
 	return {
 		entry: {
-			demo: `${path.resolve(__dirname, './src/demo/config.js')}`
+			demo: resolveApp('src/demo/config.js')
 		},
 		watchOptions: {
 			ignored: /node_modules/
 		},
 		devtool: isProduction ? false : 'source-map',
 		output: {
-			path: path.resolve(__dirname, './dist'),
+			path: resolveApp('dist'),
 			filename: 'scripts/[name].js',
 			clean: true
 		},
@@ -26,7 +30,7 @@ module.exports = (env, argv) => {
 			rules: [
 				{
 					test: /\.js$/,
-					include: [path.resolve(__dirname, './src'), path.resolve(__dirname, '../vlite')],
+					include: [resolveApp('src')],
 					use: [
 						{
 							loader: 'babel-loader'
@@ -35,7 +39,7 @@ module.exports = (env, argv) => {
 				},
 				{
 					test: /\.css$/,
-					include: [path.resolve(__dirname, './src'), path.resolve(__dirname, '../vlite')],
+					include: [resolveApp('src'), resolveApp('node_modules/vlitejs'), resolveApp('../vlite')],
 					use: [
 						MiniCssExtractPlugin.loader,
 						{
@@ -45,7 +49,7 @@ module.exports = (env, argv) => {
 							loader: 'postcss-loader',
 							options: {
 								postcssOptions: {
-									config: path.resolve(__dirname, './postcss.config.js')
+									config: resolveApp('postcss.config.js')
 								}
 							}
 						}
@@ -56,12 +60,13 @@ module.exports = (env, argv) => {
 		resolve: {
 			extensions: ['.js', '.css'],
 			alias: {
-				shared: path.resolve(__dirname, './src/shared')
+				shared: resolveApp('/src/shared'),
+				package: resolveApp('../vlite')
 			}
 		},
 		devServer: {
 			static: {
-				directory: path.resolve(__dirname, './dist')
+				directory: resolveApp('/dist')
 			},
 			historyApiFallback: true,
 			port: 3000,
@@ -78,14 +83,14 @@ module.exports = (env, argv) => {
 			}),
 			new HtmlWebpackPlugin({
 				filename: 'index.html',
-				template: path.resolve(__dirname, './public/index.html')
+				template: resolveApp('public/index.html')
 			}),
 			new webpack.optimize.ModuleConcatenationPlugin(),
 			new CopyPlugin({
 				patterns: [
 					{
-						from: path.resolve(__dirname, './public'),
-						to: path.resolve(__dirname, './dist'),
+						from: resolveApp('public'),
+						to: resolveApp('dist'),
 						globOptions: {
 							ignore: ['**/index.html']
 						}

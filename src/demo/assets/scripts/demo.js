@@ -1,13 +1,13 @@
-import '../../../../../vlite/dist/vlite.css'
-import '../../../../../vlite/dist/plugins/subtitle.css'
-import '../../../../../vlite/dist/plugins/cast.css'
-import Vlitejs from '../../../../../vlite/dist/vlite.js'
-import VlitejsSubtitle from '../../../../../vlite/dist/plugins/subtitle.js'
-import VlitejsPip from '../../../../../vlite/dist/plugins/pip.js'
-import VlitejsCast from '../../../../../vlite/dist/plugins/cast.js'
-import VlitejsYoutube from '../../../../../vlite/dist/providers/youtube.js'
-import VlitejsVimeo from '../../../../../vlite/dist/providers/vimeo'
-import VlitejsDailymotion from '../../../../../vlite/dist/providers/dailymotion'
+import 'package/dist/vlite.css'
+import 'package/dist/plugins/subtitle.css'
+import 'package/dist/plugins/cast.css'
+import Vlitejs from 'package/dist/vlite.js'
+import VlitejsSubtitle from 'package/dist/plugins/subtitle.js'
+import VlitejsPip from 'package/dist/plugins/pip.js'
+import VlitejsCast from 'package/dist/plugins/cast.js'
+import VlitejsYoutube from 'package/dist/providers/youtube.js'
+import VlitejsVimeo from 'package/dist/providers/vimeo'
+import VlitejsDailymotion from 'package/dist/providers/dailymotion'
 import validateTarget from 'validate-target'
 import html5VideoTemplate from './templates/html5-video'
 import html5AudioTemplate from './templates/html5-audio'
@@ -57,26 +57,26 @@ export default class Demo {
 	}
 
 	init() {
-		// Vlitejs.registerPlugin('subtitle', VlitejsSubtitle)
-		// Vlitejs.registerPlugin('pip', VlitejsPip)
-		// Vlitejs.registerPlugin('cast', VlitejsCast, {
-		// 	textTrackStyle: {
-		// 		backgroundColor: '#21212190'
-		// 	},
-		// 	metadata: {
-		// 		title: 'The Jungle Book',
-		// 		subtitle: 'Walt Disney Animation Studios'
-		// 	}
-		// })
+		Vlitejs.registerPlugin('subtitle', VlitejsSubtitle)
+		Vlitejs.registerPlugin('pip', VlitejsPip)
+		Vlitejs.registerPlugin('cast', VlitejsCast, {
+			textTrackStyle: {
+				backgroundColor: '#21212190'
+			},
+			metadata: {
+				title: 'The Jungle Book',
+				subtitle: 'Walt Disney Animation Studios'
+			}
+		})
 
-		// Vlitejs.registerProvider('youtube', VlitejsYoutube)
-		// Vlitejs.registerProvider('vimeo', VlitejsVimeo)
+		Vlitejs.registerProvider('youtube', VlitejsYoutube)
+		Vlitejs.registerProvider('vimeo', VlitejsVimeo)
 		Vlitejs.registerProvider('dailymotion', VlitejsDailymotion, {
 			playerId: 'x9scg'
 		})
 
 		this.addEvents()
-		this.initMedia({ provider: 'dailymotion', type: 'video' })
+		this.initMedia({ provider: 'html5', type: 'video' })
 	}
 
 	addEvents() {
@@ -122,7 +122,7 @@ export default class Demo {
 	}
 
 	initMedia({ provider, type }) {
-		const plugins = provider === 'html5' && type === 'video' ? ['cast'] : []
+		const plugins = provider === 'html5' && type === 'video' ? ['subtitle', 'pip', 'cast'] : []
 		this.content.innerHTML = this.templates[`${provider}-${type}`]
 		this.instance = new Vlitejs('#player', {
 			options: this.options[type],
