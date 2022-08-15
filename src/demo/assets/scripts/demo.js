@@ -1,8 +1,19 @@
+import 'vlitejs/dist/vlite.css'
+import 'vlitejs/dist/plugins/subtitle.css'
+import 'vlitejs/dist/plugins/cast.css'
+import Vlitejs from 'vlitejs/dist/vlite.js'
+import VlitejsSubtitle from 'vlitejs/dist/plugins/subtitle.js'
+import VlitejsPip from 'vlitejs/dist/plugins/pip.js'
+import VlitejsCast from 'vlitejs/dist/plugins/cast.js'
+import VlitejsYoutube from 'vlitejs/dist/providers/youtube.js'
+import VlitejsVimeo from 'vlitejs/dist/providers/vimeo'
+import VlitejsDailymotion from 'vlitejs/dist/providers/dailymotion'
 import validateTarget from 'validate-target'
 import html5VideoTemplate from './templates/html5-video'
 import html5AudioTemplate from './templates/html5-audio'
 import youtubeTemplate from './templates/youtube-video'
 import vimeoTemplate from './templates/vimeo-video'
+import dailymotionTemplate from './templates/dailymotion-video'
 
 export default class Demo {
 	constructor() {
@@ -38,17 +49,31 @@ export default class Demo {
 			'html5-video': html5VideoTemplate(),
 			'html5-audio': html5AudioTemplate(),
 			'youtube-video': youtubeTemplate(),
-			'vimeo-video': vimeoTemplate()
+			'vimeo-video': vimeoTemplate(),
+			'dailymotion-video': dailymotionTemplate()
 		}
 
 		this.onClickOnNav = this.onClickOnNav.bind(this)
 	}
 
 	init() {
-		window.Vlitejs.registerPlugin('subtitle', window.VlitejsSubtitle)
-		window.Vlitejs.registerPlugin('pip', window.VlitejsPip)
-		window.Vlitejs.registerProvider('youtube', window.VlitejsYoutube)
-		window.Vlitejs.registerProvider('vimeo', window.VlitejsVimeo)
+		Vlitejs.registerPlugin('subtitle', VlitejsSubtitle)
+		Vlitejs.registerPlugin('pip', VlitejsPip)
+		Vlitejs.registerPlugin('cast', VlitejsCast, {
+			textTrackStyle: {
+				backgroundColor: '#21212190'
+			},
+			metadata: {
+				title: 'The Jungle Book',
+				subtitle: 'Walt Disney Animation Studios'
+			}
+		})
+
+		Vlitejs.registerProvider('youtube', VlitejsYoutube)
+		Vlitejs.registerProvider('vimeo', VlitejsVimeo)
+		Vlitejs.registerProvider('dailymotion', VlitejsDailymotion, {
+			playerId: 'x9scg'
+		})
 
 		this.addEvents()
 		this.initMedia({ provider: 'html5', type: 'video' })
@@ -97,9 +122,9 @@ export default class Demo {
 	}
 
 	initMedia({ provider, type }) {
-		const plugins = provider === 'html5' && type === 'video' ? ['subtitle', 'pip'] : []
+		const plugins = provider === 'html5' && type === 'video' ? ['subtitle', 'pip', 'cast'] : []
 		this.content.innerHTML = this.templates[`${provider}-${type}`]
-		this.instance = new window.Vlitejs('#player', {
+		this.instance = new Vlitejs('#player', {
 			options: this.options[type],
 			plugins,
 			provider,
