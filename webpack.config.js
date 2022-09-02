@@ -54,6 +54,11 @@ module.exports = (env, argv) => {
 							}
 						}
 					]
+				},
+				{
+					test: /\.svg$/,
+					include: [resolveApp('src')],
+					type: 'asset/source'
 				}
 			]
 		},
