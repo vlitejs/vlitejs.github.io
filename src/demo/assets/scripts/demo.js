@@ -1,10 +1,13 @@
 import 'vlitejs/dist/vlite.css'
 import 'vlitejs/dist/plugins/subtitle.css'
 import 'vlitejs/dist/plugins/cast.css'
+import 'vlitejs/dist/plugins/pip.css'
+import 'vlitejs/dist/plugins/volume-bar.css'
 import Vlitejs from 'vlitejs/dist/vlite.js'
 import VlitejsSubtitle from 'vlitejs/dist/plugins/subtitle.js'
 import VlitejsPip from 'vlitejs/dist/plugins/pip.js'
 import VlitejsCast from 'vlitejs/dist/plugins/cast.js'
+import VlitejsVolumeBar from 'vlitejs/dist/plugins/volume-bar.js'
 import VlitejsYoutube from 'vlitejs/dist/providers/youtube.js'
 import VlitejsVimeo from 'vlitejs/dist/providers/vimeo'
 import VlitejsDailymotion from 'vlitejs/dist/providers/dailymotion'
@@ -68,6 +71,7 @@ export default class Demo {
 				subtitle: 'Walt Disney Animation Studios'
 			}
 		})
+		Vlitejs.registerPlugin('volume-bar', VlitejsVolumeBar)
 
 		Vlitejs.registerProvider('youtube', VlitejsYoutube)
 		Vlitejs.registerProvider('vimeo', VlitejsVimeo)
@@ -86,7 +90,7 @@ export default class Demo {
 	onClickOnNav(e) {
 		const target = e.target
 		const navButton = validateTarget({
-			target: target,
+			target,
 			selectorString: '.nav-listItemButton',
 			nodeName: ['button']
 		})
@@ -122,7 +126,8 @@ export default class Demo {
 	}
 
 	initMedia({ provider, type }) {
-		const plugins = provider === 'html5' && type === 'video' ? ['subtitle', 'pip', 'cast'] : []
+		const plugins =
+			provider === 'html5' && type === 'video' ? ['subtitle', 'pip', 'cast', 'volume-bar'] : []
 		this.content.innerHTML = this.templates[`${provider}-${type}`]
 		this.instance = new Vlitejs('#player', {
 			options: this.options[type],
@@ -142,6 +147,8 @@ export default class Demo {
 				player.on('leavepip', () => console.log('leavepip'))
 				player.on('trackenabled', () => console.log('trackenabled'))
 				player.on('trackdisabled', () => console.log('trackdisabled'))
+				player.on('castsessionstarted', () => console.log('castsessionstarted'))
+				player.on('castsessionended', () => console.log('castsessionended'))
 			}
 		})
 	}

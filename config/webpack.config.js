@@ -14,6 +14,7 @@ module.exports = (env, argv) => {
 	const isProduction = argv.mode === 'production'
 
 	return {
+		context: appDirectory,
 		entry: {
 			demo: resolveApp('src/demo/config.js')
 		},
@@ -49,7 +50,7 @@ module.exports = (env, argv) => {
 							loader: 'postcss-loader',
 							options: {
 								postcssOptions: {
-									config: resolveApp('postcss.config.js')
+									config: resolveApp('config/postcss.config.js')
 								}
 							}
 						}
@@ -77,8 +78,7 @@ module.exports = (env, argv) => {
 			port: 3000,
 			compress: true,
 			hot: true,
-			open: true,
-			https: true
+			open: true
 		},
 		plugins: [
 			new webpack.ProgressPlugin(),

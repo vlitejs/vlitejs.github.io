@@ -12,7 +12,7 @@ body {
 }
 
 html {
-	font-family: -apple-system, blinkmacsystemfont, segoe UI, Helvetica, Arial, sans-serif;
+	font-family: -apple-system, blinkmacsystemfont, 'segoe UI', Helvetica, Arial, sans-serif;
 	background-color: rgba(255 127 21 / 2%);
 	height: 100%;
 }
@@ -28,11 +28,9 @@ body {
 	display: grid;
 	justify-content: center;
 	position: relative;
-	grid-template-rows: auto 1fr;
-	grid-template-columns: 1fr;
-	grid-template-areas:
+	grid-template:
 		'grid-header'
-		'grid-content';
+		'grid-content' 1fr / 1fr;
 	width: 100%;
 	grid-row-gap: 30px;
 	padding: 30px 15px calc(30px + var(--navHeight));
@@ -121,7 +119,7 @@ body {
 
 	&-listItemButton,
 	&-listItemLink {
-		padding: 10px 5px 5px 5px;
+		padding: 10px 5px 5px;
 		border-radius: 3px 3px 0 0;
 		display: flex;
 		align-items: center;
@@ -209,7 +207,6 @@ body {
 .sr-only {
 	border: 0;
 	clip: rect(1px, 1px, 1px, 1px);
-	-webkit-clip-path: inset(50%);
 	clip-path: inset(50%);
 	height: 1px;
 	margin: -1px;
@@ -220,7 +217,7 @@ body {
 	white-space: nowrap;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (width >= 900px) {
 	body {
 		align-items: center;
 	}
@@ -234,10 +231,7 @@ body {
 	}
 
 	.nav {
-		bottom: auto;
-		left: auto;
-		top: 0;
-		right: 0;
+		inset: 0 0 auto auto;
 		width: auto;
 		height: auto;
 
