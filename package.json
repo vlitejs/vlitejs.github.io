@@ -21,7 +21,7 @@
 	"prettier": "./config/prettier.config.js",
 	"dependencies": {
 		"validate-target": "^2.0.0",
-		"vlitejs": "^5.0.0"
+		"vlitejs": "^5.0.1"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.13.15",
