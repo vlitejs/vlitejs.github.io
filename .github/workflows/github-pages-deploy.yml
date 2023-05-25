@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  npm:
+  github:
     uses: yoriiis/actions/.github/workflows/github-pages-deploy.yml@main
     with:
       node-version: 18
