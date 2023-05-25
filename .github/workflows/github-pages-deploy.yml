@@ -1,0 +1,14 @@
+name: Publish Node.js Package
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  npm:
+    uses: yoriiis/actions/.github/workflows/github-pages-deploy.yml@main
+    with:
+      node-version: 18
+      command: npm run build
+      build-dir: dist
+      target-branch: demo
