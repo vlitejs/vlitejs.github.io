@@ -5,6 +5,7 @@
 	"scripts": {
 		"build": "rm -rf ./dist/ && webpack --mode=production --config config/webpack.config.js",
 		"start": "rm -rf ./dist/ && webpack serve --mode=development --config config/webpack.config.js",
+		"test": "echo \"No test specified\" && exit 0",
 		"test:eslint": "eslint ./src --config config/.eslintrc.js --ignore-pattern dist",
 		"test:eslint:fix": "eslint ./src --config config/.eslintrc.js --ignore-pattern dist --fix",
 		"test:stylelint": "stylelint './src/**/*.css' --config ./config/stylelint.config.js",
