@@ -11,12 +11,20 @@
             "editor.tabSize": 4,
             "editor.rulers": [100]
         },
+        "[yaml]": {
+			"editor.tabSize": 2,
+			"editor.detectIndentation": true,
+			"editor.insertSpaces": true,
+			"editor.autoIndent": "none"
+		},
         "editor.tabSize": 4,
         "files.associations": {
             "*.css": "postcss",
             "*.html": "html",
             "*.ts": "typescript",
-            "*.json": "json"
+            "*.json": "json",
+			"*.yaml": "yaml",
+			"*.yml": "yaml"
         },
         "files.trimTrailingWhitespace": true,
         "javascript.format.enable": false,
