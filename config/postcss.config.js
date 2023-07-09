@@ -1,21 +1,24 @@
 module.exports = (api) => {
 	return {
 		plugins: [
-			require('postcss-import')(),
-			require('postcss-url')(),
-			require('postcss-preset-env')({
-				stage: 2,
-				features: {
-					'custom-properties': {
-						warnings: true,
-						preserve: true
+			'postcss-import',
+			'postcss-url',
+			'postcss-nested',
+			[
+				'postcss-preset-env',
+				{
+					stage: 2,
+					features: {
+						'nesting-rules': false
 					}
 				}
-			}),
-			require('postcss-nested')(),
-			require('postcss-custom-media')({
-				preserve: false
-			})
+			],
+			[
+				'postcss-custom-media',
+				{
+					preserve: false
+				}
+			]
 		]
 	}
 }
