@@ -136,7 +136,7 @@ module.exports = (env, argv) => {
 			removeAvailableModules: true,
 			removeEmptyChunks: true,
 			mergeDuplicateChunks: true,
-			providedExports: false,
+			providedExports: true,
 			splitChunks: false
 		}
 	}
