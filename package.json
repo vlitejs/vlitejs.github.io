@@ -18,7 +18,7 @@
 	"prettier": "./config/prettier.config.js",
 	"dependencies": {
 		"validate-target": "^3.1.1",
-		"vlitejs": "^7.3.2"
+		"vlitejs": "^7.4.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.27.4",
@@ -30,12 +30,12 @@
 		"css-minimizer-webpack-plugin": "^7.0.2",
 		"html-webpack-plugin": "^5.6.3",
 		"mini-css-extract-plugin": "^2.9.2",
-		"postcss": "^8.5.4",
+		"postcss": "^8.5.5",
 		"postcss-custom-media": "^11.0.6",
 		"postcss-import": "^16.1.0",
 		"postcss-loader": "^8.1.1",
 		"postcss-nested": "^7.0.2",
-		"postcss-preset-env": "^10.2.2",
+		"postcss-preset-env": "^10.2.3",
 		"postcss-url": "^10.1.1",
 		"prettier": "^3.5.3",
 		"style-loader": "^4.0.0",
