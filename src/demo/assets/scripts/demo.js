@@ -3,20 +3,20 @@ import 'vlitejs/plugins/subtitle.css'
 import 'vlitejs/plugins/cast.css'
 import 'vlitejs/plugins/pip.css'
 import 'vlitejs/plugins/volume-bar.css'
-import Vlitejs from 'vlitejs'
-import VlitejsSubtitle from 'vlitejs/plugins/subtitle.js'
-import VlitejsPip from 'vlitejs/plugins/pip.js'
-import VlitejsCast from 'vlitejs/plugins/cast.js'
-import VlitejsVolumeBar from 'vlitejs/plugins/volume-bar.js'
-import VlitejsYoutube from 'vlitejs/providers/youtube.js'
-import VlitejsVimeo from 'vlitejs/providers/vimeo'
-import VlitejsDailymotion from 'vlitejs/providers/dailymotion'
 import validateTarget from 'validate-target'
-import html5VideoTemplate from './templates/html5-video'
-import html5AudioTemplate from './templates/html5-audio'
-import youtubeTemplate from './templates/youtube-video'
-import vimeoTemplate from './templates/vimeo-video'
+import Vlitejs from 'vlitejs'
+import VlitejsCast from 'vlitejs/plugins/cast.js'
+import VlitejsPip from 'vlitejs/plugins/pip.js'
+import VlitejsSubtitle from 'vlitejs/plugins/subtitle.js'
+import VlitejsVolumeBar from 'vlitejs/plugins/volume-bar.js'
+import VlitejsDailymotion from 'vlitejs/providers/dailymotion'
+import VlitejsVimeo from 'vlitejs/providers/vimeo'
+import VlitejsYoutube from 'vlitejs/providers/youtube.js'
 import dailymotionTemplate from './templates/dailymotion-video'
+import html5AudioTemplate from './templates/html5-audio'
+import html5VideoTemplate from './templates/html5-video'
+import vimeoTemplate from './templates/vimeo-video'
+import youtubeTemplate from './templates/youtube-video'
 
 export default class Demo {
 	constructor() {
@@ -133,7 +133,7 @@ export default class Demo {
 			options: this.options[type],
 			plugins,
 			provider,
-			onReady: function (player) {
+			onReady: (player) => {
 				console.log(player)
 				player.on('play', () => console.log('play'))
 				player.on('pause', () => console.log('pause'))

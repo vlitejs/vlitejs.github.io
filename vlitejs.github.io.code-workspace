@@ -5,17 +5,28 @@
 		}
 	],
 	"settings": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
-		"[javascript][typescript][postcss][html][markdown][json][markdown]": {
+		"editor.defaultFormatter": "biomejs.biome",
+		"[javascript][typescript][postcss][json][markdown]": {
 			"editor.formatOnSave": true,
 			"editor.tabSize": 4,
 			"editor.rulers": [100]
+		},
+		"[markdown][html]": {
+			"editor.formatOnSave": true,
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+			"editor.wordWrap": "off"
 		},
 		"[yaml]": {
 			"editor.tabSize": 2,
 			"editor.detectIndentation": true,
 			"editor.insertSpaces": true,
 			"editor.autoIndent": "none"
+		},
+		"[javascript][typescript][json][css]": {
+			"editor.codeActionsOnSave": {
+				"quickfix.biome": "explicit",
+				"source.organizeImports.biome": "explicit"
+			}
 		},
 		"editor.tabSize": 4,
 		"files.associations": {
@@ -37,6 +48,7 @@
 	},
 	"extensions": {
 		"recommendations": [
+			"biomejs.biome",
 			"esbenp.prettier-vscode",
 			"dbaeumer.vscode-eslint",
 			"mhmadhamster.postcss-language"
