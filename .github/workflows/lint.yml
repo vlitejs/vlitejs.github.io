@@ -15,4 +15,3 @@ jobs:
     uses: yoriiis/actions/.github/workflows/lint.yml@main
     with:
       typescript-status: false
-      markdown-status: false
