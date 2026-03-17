@@ -6,6 +6,7 @@ import 'vlitejs/plugins/volume-bar.css'
 import validateTarget from 'validate-target'
 import Vlitejs from 'vlitejs'
 import VlitejsCast from 'vlitejs/plugins/cast.js'
+import VlitejsMobile from 'vlitejs/plugins/mobile.js'
 import VlitejsPip from 'vlitejs/plugins/pip.js'
 import VlitejsSubtitle from 'vlitejs/plugins/subtitle.js'
 import VlitejsVolumeBar from 'vlitejs/plugins/volume-bar.js'
@@ -62,6 +63,7 @@ export default class Demo {
 	init() {
 		Vlitejs.registerPlugin('subtitle', VlitejsSubtitle)
 		Vlitejs.registerPlugin('pip', VlitejsPip)
+		Vlitejs.registerPlugin('mobile', VlitejsMobile)
 		Vlitejs.registerPlugin('cast', VlitejsCast, {
 			textTrackStyle: {
 				backgroundColor: '#21212190'
@@ -127,7 +129,9 @@ export default class Demo {
 
 	initMedia({ provider, type }) {
 		const plugins =
-			provider === 'html5' && type === 'video' ? ['subtitle', 'pip', 'cast', 'volume-bar'] : []
+			provider === 'html5' && type === 'video'
+				? ['subtitle', 'pip', 'mobile', 'cast', 'volume-bar']
+				: []
 		this.content.innerHTML = this.templates[`${provider}-${type}`]
 		this.instance = new Vlitejs('#player', {
 			options: this.options[type],
