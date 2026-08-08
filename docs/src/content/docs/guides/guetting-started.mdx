@@ -1,0 +1,48 @@
+---
+title: Getting started
+---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components'
+
+## Installation
+
+<Aside type="caution">
+	vlitejs@6 is ESM and uses the [Node.js package
+	`exports`](https://nodejs.org/api/packages.html#exports)
+</Aside>
+
+### NPM
+
+NPM is the recommended installation method. Install `vlitejs` in your project with the following command:
+
+<Tabs syncKey="pkg">
+    <TabItem label="npm">
+        ```sh
+        npm install vlitejs --save-dev
+        ```
+    </TabItem>
+    <TabItem label="Yarn">
+        ```sh
+        yarn add vlitejs --dev
+        ```
+    </TabItem>
+
+</Tabs>
+
+<Aside type="caution">The minimum supported `Node.js` version is `16.20.0`.</Aside>
+
+### CDN
+
+You can also download it and include it with a script tag as an ESM.
+
+```html
+<link href="https://cdn.jsdelivr.net/npm/vlitejs@6/dist/vlite.css" rel="stylesheet" crossorigin />
+<script type="module">
+	import Vlitejs from 'https://cdn.jsdelivr.net/npm/vlitejs@6'
+</script>
+```
+
+<Aside type="tip">
+	You can browse the source of the NPM package at
+	[jsdelivr.com/package/npm/vlitejs](https://www.jsdelivr.com/package/npm/vlitejs).
+</Aside>
